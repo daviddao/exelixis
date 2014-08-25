@@ -10,9 +10,6 @@ tree.layout = require('./layout');
 tree.node = require('./node');
 
 
-
-
-
 tree = function () {
     "use strict";
     var tree = {};
