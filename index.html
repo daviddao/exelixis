@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BioJS Tree Viewer</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head><!--/head-->
+
+<body data-spy="scroll" data-target="#navbar" data-offset="0">
+    <header id="header" role="banner">
+        <div class="container">
+			<a class="hidden-md hidden-lg" href="https://github.com/greenify/biojs-vis-msa"><img style="position: absolute; top: 0; left: 0; border: 0;z-index: 10;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+    	<a class="hidden-xs hidden-sm" href="https://github.com/greenify/biojs-vis-msa"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 10;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
+        <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+					<h2><a id="title" href="index.html">BioJS Tree Viewer</a></h2>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#main-slider"><i class="icon-home"></i></a></li>
+                        <li class="hidden-xs hidden-md"><a href="#demo">Live demo</a></li>
+						<li><a href="#download">Download</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about-us">About the project</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header><!--/#header-->
+
+    <section id="main-slider" class="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-content">
+                        <h1>Phylogenetic tree visualization</h1>
+                        <p class="lead">
+                    	BioJS Tree Viewer is an open source web visualization for phylogenetic trees.
+                    </div>
+                </div>
+            </div><!--/.item-->
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-content">
+						<h1>Beautiful Evolution</h1j>
+                        <p class="lead">
+                    	Build interactive and informative visualizations using BioJS Tree Viewer
+                    </div>
+                </div>
+            </div><!--/.item-->
+        </div><!--/.carousel-inner-->
+        <a class="prev" href="#main-slider" data-slide="prev"><i class="icon-angle-left"></i></a>
+        <a class="next" href="#main-slider" data-slide="next"><i class="icon-angle-right"></i></a>
+    </section><!--/#main-slider-->
+
+   
+
+   <section id="demo" class="hidden-xs hidden-sm">
+        <div class="container">
+            <div class="box">
+                <div class="center">
+                    <h2>Live demo</h2>
+                    <p class="lead">You can modify this example.</p>
+
+					<a class="jsbin-embed" href="http://jsbin.com/meyis/1/embed?js,output&height=325px">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+                </div><!--/.center-->   
+				<!-- <div class="big-gap"></div> -->
+           </div> 
+        </div>
+    </section>
+
+   <section id="download">
+        <div class="container">
+            <div class="box">
+                <div class="center">
+                    <h2>Download</h2>
+                    <p class="lead">Just include this JS and CSS file</p>
+
+					<pre class="code_links">&lt;script src=//daviddao.de/biojs-vis-tree.min.js&gt;&lt;/script&gt;
+&lt;link type=text/css rel=stylesheet href=//daviddao.de/tnt.css /&gt;</pre>
+					<div> &nbsp;</div>
+					<a href="https://github.com/greenify/biojs-vis-msa" >
+						<!--	<i class="icon-github" style="font-size: 80px; color: black"></i>  -->
+						<img src="./images/octocat.png" />
+					</a>
+					<br />
+					(more info on github)
+
+					</div>
+
+                </div><!--/.center-->   
+				<!-- <div class="big-gap"></div> -->
+           </div> 
+        </div>
+    </section>
+    
+     <section id="services">
+        <div class="container">
+            <div class="box first">
+				<div class="center">
+					<h2 id="features">Features</h2>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-bolt icon-md icon-color1"></i>
+                            <h4>Powerful</h4>
+							<p>Based on D3, BioJS Tree is powerful and allows a variety of beautiful and customizable visualizations using phylogenetic trees</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-thumbs-up icon-md icon-color2"></i>
+                            <h4>easy</h4>
+                            <p>Just link to our CDN file. For your convenience the MSA viewer has prebuilt support for different file formats like NEWICK or EXTENDED NEWICK.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-cogs icon-md icon-color3"></i>
+                            <h4>extendable</h4>
+                            <p>Whether it is just a smaller font or different layout. The Tree viewer was designed to be easily adaptable to your use case.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+					<div class="clearfix"> </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-heart icon-md icon-color4"></i>
+                            <h4>beautiful</h4>
+                            <p>Hand-crafted with love from around the globe.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-html5 icon-md icon-color5"></i>
+                            <h4>pure Javascript</h4>
+                            <p>Using state-of-the-art technologies everything runs in the browser - you don't need to worry about a backend.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-bug icon-md icon-color6"></i>
+                            <h4>well tested</h4>
+                            <p>We don't want to break your website. CI tests are run on every commit.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+					<div class="clearfix"> </div>
+				    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-coffee icon-md icon-color3"></i>
+                            <h4>easy to use</h4>
+                            <p>Many code examples and reusable themes makes BioJS Tree Viewer easy to understand and to use</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-github icon-md icon-color2"></i>
+                            <h4>open source</h4>
+                            <p>Sponsored by Google's open source program the whole codebase is available freely on github for personal and commerical use. Pull requests are welcome.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="center">
+                            <i class="icon-rocket icon-md icon-color1"></i>
+                            <h4>BioJS 2.0 compliant</h4>
+                            <p>You can combine the Tree viewer with any other BioJS compliant web component.</p>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                </div><!--/.row-->
+            </div><!--/.box-->
+        </div><!--/.container-->
+    </section><!--/#services-->
+
+    <section id="about-us">
+        <div class="container">
+            <div class="box">
+                <div class="center">
+                    <h2>About the project</h2>
+					<p class="lead"> This component wouldn't have been possible without these awesome people. </p>
+                    <p>This project is a subproject of BioJS and started in the GSoC 2014.</p>
+                </div>
+                <div class="gap"></div>
+                <div id="team-scroller" class="carousel scale">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="./images/people/david.jpg" alt="Seb" ></p>
+                                        <h3>David Dao<small class="designation">GSoC Student</small></h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="./images/people/miguel.jpg" alt="" ></p>
+                                        <h3>Miguel Pignatelli<small class="designation">Software Engineer Ensembl</small></h3>
+                                    </div>
+                                </div>        
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="./images/people/fabian.jpg" alt="" style="
+    width: 240px;
+"></p>
+                                        <h3>Fabian Schreiber<small class="designation">Group Leader Tree Fam</small></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="https://sigil.cupcake.io/manny" alt="" ></p>
+                                        <h3>Manuel Corpas, PhD<small class="designation">GSoC BioJS org admin</small></h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="./images/people/iris.jpg" alt="" ></p>
+                                        <h3>Iris Shih<small class="designation">Support</small></h3>
+                                    </div>
+                                </div> 
+                                <div class="col-sm-4">
+                                    <div class="member">
+                                        <p><img class="img-responsive img-thumbnail img-circle" src="https://sigil.cupcake.io/your" alt="" ></p>
+                                        <h3>your spot<small class="designation">t.b.a.</small></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+ 
+                    </div>
+                    <a class="left-arrow" href="#team-scroller" data-slide="prev">
+                        <i class="icon-angle-left icon-4x"></i>
+                    </a>
+                    <a class="right-arrow" href="#team-scroller" data-slide="next">
+                        <i class="icon-angle-right icon-4x"></i>
+                    </a>
+                </div><!--/.carousel-->
+            </div><!--/.box-->
+        </div><!--/.container-->
+    </section><!--/#about-us-->
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    Part of the <a target="_blank" href="http://biojs.net" title="Visualize biological data on the web">BioJS</a> collection.
+                </div>
+                <div class="col-sm-6">
+                    <img class="pull-right" src="images/shapebootstrap.png" alt="ShapeBootstrap" title="ShapeBootstrap">
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
