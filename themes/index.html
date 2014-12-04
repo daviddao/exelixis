@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>e!Peek Themes</title>
+
+<style>
+
+@import url(../index.css);
+
+.example img {
+  <!-- float: left; -->
+  margin-bottom: 13px;
+  width: 275px;
+  height: 154px;
+  border: solid 2px #ccc;
+}
+
+.example:hover img {
+  border-color: steelblue;
+}
+
+</style>
+
+<div id="body">
+  <script src="../lib/d3.min.js"></script>
+  <header>
+    <a href="../index.html">Overview</a></b>
+    <b><a style="margin-left:1em;" href="./index.html"><b>Themes</b></a></b>
+    <a style="margin-left:1em;" href="./">Examples</a>
+    <a style="margin-left:1em;" href="../doc/api/index.html">Documentation</a>
+    <a style="margin-left:1em;" href="https://github.com/emepyc">Source</a>
+  </header>
+
+  <h1>Themes</h1>
+  <h2>Overview</h2>
+  <p>e!Peek themes surround and interact with the e!Peek core plug-in. The themes shown here are ready to use in your web page. They may also serve as examples of how to develop your own theme.</p>
+  <p>To use one of the following themes use the following code:</p>
+  <pre><code class="html">&lt;script src="http://www.ebi.ac.uk/~mp/ePeek/v1/lib/ePeek.min.js" charset="utf-8">&lt;/script></code>
+<code class="html">&lt;script src="http://www.ebi.ac.uk/~mp/ePeek/v1/lib/themes/&lt;theme_name&gt;.min.js" charset="utf-8">&lt;/script></code></pre>
+  <pre><code class="javascript">
+var gB = epeek.genome().width(920); // other methods can be included here
+var gBTheme = epeek_theme(); // other methods can be included here
+gBTheme(gB, document.getElementById(&lt;DOM_element_id&gt;);
+    </code></pre>
+  <p>The themes may also have an external API to interact with (see for example the <a href="compact/compact.html">compact theme</a> below)</p>
+
+  <p>Most of the themes shown below use the <a href="http://d3js.org">d3.js</a> library for any DOM manipulation. This is not a requirement for any theme since the same results can be achieved with any other framework like, for example, <a href="http://jquery.com">jQuery</a></p>
+
+  <h2>Basic Themes</h2>
+  <p>These themes are examples that illustrate specific aspects of the <a href="../doc/api/genome/index.html">genome core plug-in API</a>
+
+  <ul>
+    <li><a href="minimal/minimal.html">Minimal</a> : Shows the minimum scheleton needed to build custom themes</li>
+    <li><a href="tooltips/tooltips.html">Tooltips</a> : Shows how to integrate tooltips when genes are selected</li>
+    <li><a href="legend/legend.html">Legend</a> : A simple example of how to add a legend to the genome browser</li>
+    <li><a href="pins/pins.html">Pin</a> : Shows how to display custom data in the genome browser</li>
+    <li><a href="buttons/buttons.html">Buttons</a> : Shows how to control a custom theme with buttons</li>
+    <!-- <li><a href="resize/resize.html">Resize</a> : Shows how to resize the genome browser lively</li> -->
+    <li><a href="resizable-div/resizable-div.html">Resizable-div</a> : A more advanced examples of how to resize the genome browser</li>
+  </ul>
+
+  <h2>Advanced Themes</h2>
+  <p>Themes themes show more advanced features of the <a href="../doc/api/genome/index.html">genome core plug-in API</a></p>
+
+  <ul>
+    <li><a href="comparative/comparative.html">Comparative</a> : Shows how to compare regions between two species</li>
+    <li><a href="compact/compact.html">Compact</a> : Shows a more functional theme with links, navigation and search capabilities</li>
+    <li><a href="orthologues_tree/orthologues_tree.html">Orthology Tree</a> : Shows a more sophisticated theme with orthologues displayed on a tree</li>
+    <li><a href="mobile/mobile.html?loc=BRCA2#browser">Mobile</a> : Shows a functional theme for iOS and Android</li> 
+  </ul>
+
+
+  <footer>
+    <aside>Released under <a href="http://www.opensource.org/licenses/apache2.0.php">Apache 2.0</a>.</aside>
+    Copyright 2014 <a href="http://www.ebi.ac.uk/~mp" rel="author">Miguel Pignatelli</a>
+  </footer>
+
+</div>
+
+<script src="../highlight.v0.min.js"></script>

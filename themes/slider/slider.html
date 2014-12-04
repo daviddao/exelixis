@@ -1,0 +1,31 @@
+<!DOCTYPE htlm>
+
+<meta charset="utf-8">
+<title>TnT Themes</title>
+
+<div id="body">
+
+  <!-- D3 -->
+  <script src="../../lib/d3.min.js"></script>
+
+  <!-- TnT -->
+  <link rel="stylesheet" href="../../lib/tnt.css" type="text/css" />
+
+  <script src="../../lib/tnt.js"></script>
+  <script src="slider.js"></script>
+
+  <h1>Slider</h1>
+  <div id="my_vis"></div>
+  <script>
+    (function () {
+       var theme = tnt_theme_slider();
+       theme (document.getElementById ("my_vis"));
+    })();
+  </script>
+
+  <footer>
+    <aside>Released under <a href="http://www.opensource.org/licenses/apache2.0.php">Apache 2.0</a>.</aside>
+    Copyright 2014 <a href="http://www.ebi.ac.uk/~mp" rel="author">Miguel Pignatelli</a>
+  </footer>
+
+</div>

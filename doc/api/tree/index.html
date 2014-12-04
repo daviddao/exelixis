@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>e!Peek API</title>
+
+<style>
+  @import url(../../../index.css);
+  <!-- insert in-place styles here -->
+</style>
+
+<div id="body">
+  <header>
+    <script src="../../../lib/d3.min.js"></script>
+    <a href="../../../index.html">Overview</a>
+    <a style="margin-left:1em;" href="../../../themes/index.html">Themes</a>
+    <a style="margin-left:1em;" href="./">Examples</a>
+    <b><a style="margin-left:1em;" href="../index.html">Documentation</a></b>
+    <a style="margin-left:1em;" href="https://github.com/emepyc">Source</a>
+  </header>
+
+  <h1>API Reference</h1>
+  <a href="../index.html"><h2>Tree</h2></a>
+
+  <h2><a name="working" href="#working">#</a>Working with trees</h2>
+  <p>This library provides several methods for parsing, querying and working with phylogenetic trees. The following example shows how to use it for basic tree manipulation:</p>
+  <pre><code class="javascript">
+var tree = epeek.tree(newick);
+var node1 = tree.find_node_by_name(name1);
+var node2 = tree.find_node_by_name(name2);
+var lca = tree.lca([node1, node2]);
+tree.traverse(lca, callback);
+  </code></pre>
+
+  <p>This library is also compatible with <a href="https://github.com/mbostock/d3/wiki/Cluster-Layout">D3's cluster layout</a>. This means that it is easy to create tree representations combining both. For example:</p>
+
+
+
+
+  <p>All the responses are in JSON and corresponds with the responses described in the <a href="http://beta.rest.ensembl.org">Ensembl REST API</a> documentation</p>
+  <p>It is possible to have more than one epeek.eRest at the same time without interfering:</p>
+
+  <pre><code class="javascript">
+var rest_conn1 = epeek.eRest();
+var rest_conn2 = epeek.eRest();
+  </code></pre>
+
+  <p><a name="call" href="#call">#</a> rest.<b>call</b> (&lt;object&gt;)</p>
+  <p>This method makes an asynchronous call to the <a href="http://beta.rest.ensembl.org">Ensembl REST API</a>. The expected parameter must be an object containg the following fields:</p>
+
+  <p>
+    <ul>
+      <li><b>url</b>        : A string containing the url to query the <a href="http://beta.rest.ensembl.org">Ensembl REST API</a></li>
+      <li><b>on_success</b> : A callback to be executed if the asynchronous call to the REST server is successful. The response in JSON format is passsed to this callback as its argument</li>
+      <li><b>on_error</b>   : A callback to be executed if the asynchronous call to the REST server results in an error. The error is passed to the callback as its argument</li>
+    </ul>
+  </p>
+
+  <h2><a name="urls" href="#urls">#</a>URLs</h2>
+  <p>Different methods are implemented to obtain the needed URLs to query the <a href="http://beta.rest.ensembl.org">Ensembl REST API</a>. These URLs are used in the rest.<a href="#call">call</a> method to make an actual query</p>
+
+  <p><a name="region" href="#region">#</a> rest.url.<b>region</b> (&lt;object&gt;)</p>
+  <p>This method returns the <a href="http://beta.rest.ensembl.org">Ensembl REST</a> url to retrieve genes included the specified region. It uses the <a href="http://beta.rest.ensembl.org/documentation/info/feature_region">/feature/region/:species/:region</a> endpoint. Its argument must be an object with the following fields:</p>
+
+  <p>
+    <ul>
+      <li><b>species</b> : The species the region refers to</li>
+      <li><b>chr</b>     : The chromosome (or seq_region name) the region is located</li>
+      <li><b>from</b>    : The start position of the region in the chromosome / seq_region</li>
+      <li><b>to</b>      : The end position of the region in the chromosome / seq_region (from &lt; to always)</li>
+    </ul>
+  </p>
+
+  <p>Example:</p>
+  <pre><code class="javascript">
+var url = rest.url.region ({ species : "homo_sapiens",
+                              chr     : 13,
+                              from    : 32889611,
+                              to      : 32973805
+                            }),
+  </code></pre>
+
+  <p><a name="species_gene" href="#species_gene">#</a> rest.url.<b>species_gene</b> (&lt;object&gt;)</p>
+  <p>This method returns the <a href="http://beta.rest.ensembl.org">Ensembl REST</a> url to retrieve Ensembl genes associated with the given name / external reference in the specified species. It uses the <a href="http://beta.rest.ensembl.org/documentation/info/xref_external">xrefs/symbol/:species/:symbol</a> endpoint. Its argument is an object that must have the following fields:</p>
+
+  <p>
+    <ul>
+      <li><b>species</b>   : The species the symbol refers to</li>
+      <li><b>gene_name</b> : The name / symbol to look for in the specified genome</li>
+    </ul>
+  </p>
+
+  <p>Example:</p>
+
+  <pre><code class="javascript">
+var url =  rest.url.species_gene ({ species : "human",
+                                     gene_name : "BRCA2"
+                                   }),
+  </code></pre>
+
+  <p><a name="homologues" href="#homologues">#</a> rest.url.<b>homologues</b> (&lt;object&gt;)</p>
+  <p>This method returns the <a href="http://beta.rest.ensembl.org">Ensembl REST</a> url to retrieve the homologues (orthologues + paralogues) of a given Ensembl gene. It uses the <a href="http://beta.rest.ensembl.org/documentation/info/homology_ensemblgene">homology/id/:id</a> endpoint. Its argument is an object having the following fields:</p>
+
+  <p>
+    <ul>
+      <li><b>id</b> : The Ensembl ID of the gene</li>
+    </ul>
+  </p>
+
+  <p>Example:</p>
+
+  <pre><code class="javascript">
+var url = rest.url.homologues ({ id : "ENSG00000139618" })
+  </code></pre>
+
+  <p><a name="gene" href="#gene">#</a> rest.url.<b>gene</b> (&lt;object&gt;)</p>
+  <p>This method returns the <a href="http://beta.rest.ensembl.org">Ensembl REST</a> url to retrieve the Ensembl gene associated with the given Ensembl ID. It uses the <a href="http://beta.rest.ensembl.org/documentation/info/lookup">lookup/id/:id</a> endpoint. Its argument must be an object having the following fields:</p>
+
+  <p>
+    <ul>
+      <li><b>id</b> : The Ensembl ID of the gene</li>
+    </ul>
+  </p>
+
+  <p>Example:</p>
+
+    <pre><code class="javascript">
+var url = rest.url.gene ({ id : "ENSG00000139618" })
+  </code></pre>
+
+  <p><a name="chr_info" href="#chr_info">#</a> rest.url.<b>chr_info</b> (&lt;object&gt;)</p>
+  <p>This method returns the <a href="http://beta.rest.ensembl.org">Ensembl REST</a> url to retrieve the information associated with the given chromosome / seq_region name in the given species. It uses the <a href="http://beta.rest.ensembl.org/documentation/info/assembly_stats">assembly/info/:species/:region_name</a> endpoint. Its argument must be an object with the following mandatory fields:</p>
+
+  <p>
+    <ul>
+      <li><b>species</b> : The species the chr / seq_region belongs to</li>
+      <li><b>chr</b>     : The name of the chr / seq_region</li>
+    </ul>
+  </p>
+
+  <p>Example:</p>
+
+  <pre><code class="javascript">
+var url = rest.url.chr_info ({ species : "homo_sapiens",
+                               chr     : 13
+                             })
+  </code></pre>
+
+  <p><a name="limits" href="#limits">#</a> rest.<b>limits</b> ()</p>
+  <p>This method returns the limits imposed by the Ensembl REST API. It is used by the epeek plug-ins to avoid requesting the REST server more data that it is allowed to serve. Currently, the following limits are defined:</p>
+
+  <p>
+    <ul>
+      <li><b>region</b> : The limit size of a genomic region to ask for. This limit is currently 5MB</li>
+    </ul>
+  </p>
+
+  <footer>
+    <aside>Released under <a href="http://www.opensource.org/licenses/apache2.0.php">Apache 2.0</a>.</aside>
+    Copyright 2014 <a href="http://www.ebi.ac.uk/~mp" rel="author">Miguel Pignatelli</a>
+  </footer>
+
+</div>
+
+<script src="../../../highlight.v0.min.js"></script>

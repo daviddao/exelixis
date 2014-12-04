@@ -1,0 +1,59 @@
+/* OPTIONS */
+.ePeek_options_pane {
+  display: block; }
+  .ePeek_options_pane span {
+    font-size: 14px; }
+
+div .ePeek_TabBlock {
+  display: block;
+  height: 40px;
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+div .ePeek_TabBlock_active {
+  opacity: 1;
+  z-index: 1000; }
+
+.ePeek_option_label {
+  margin-right: 10px;
+  #     border-bottom-style: solid;
+  cursor: pointer; }
+
+.ePeek_link_label, .ePeek_qrtag_label {
+  margin-right: 10px;
+  #     border-top-style: solid;
+  cursor: pointer; }
+
+.ePeek_top_option {
+  display: inline;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px; }
+
+.ePeek_options_pane span, .ePeek_links_pane span {
+  font-size: 14px; }
+
+.ePeek_options_pane, .ePeek_links_pane {
+  margin: 10px 10px 10px 5px; }
+
+.ePeek_links_pane {
+  position: absolute;
+  right: 0px; }
+
+.ePeek_text_rotated {
+  display: block;
+  position: absolute;
+  z-index: 1002;
+  right: 0px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg); }
+
+.ePeek_link {
+  cursor: pointer; }

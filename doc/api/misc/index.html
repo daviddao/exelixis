@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>e!Peek API</title>
+
+<style>
+  @import url(../../../index.css);
+  <!-- insert in-place styles here -->
+</style>
+
+<div id="body">
+  <header>
+    <script src="../../../lib/d3.min.js"></script>
+    <a href="../../../index.html">Overview</a>
+    <a style="margin-left:1em;" href="../../../themes/index.html">Themes</a>
+    <a style="margin-left:1em;" href="./">Examples</a>
+    <b><a style="margin-left:1em;" href="../index.html">Documentation</a></b>
+    <a style="margin-left:1em;" href="https://github.com/emepyc">Source</a>
+  </header>
+
+  <h1>API Reference</h1>
+  <a href="../index.html"><h2>Misc Methods</h2></a>
+
+  <p><a name="scriptPath" href="#scriptPath">#</a> epeek.<b>scriptPath</b>(&lt;string&gt;)</p>
+  <p>This method returns the full path of a given script file. The script file has to be imported in the current page. It can be used to load resources relative to a given script file.</p>
+
+  <p>Example:</p>
+
+  <pre><code class="javascript">
+var path = epeek.scriptPath("name_of_file.js");
+// ...
+
+some_element
+   .append("img")
+   .attr("src", path + "relative/path/to/image.png");
+
+// ...
+  </code></pre>
+
+
+  <h2><a name="d3" href="#d3">#</a>D3 methods</h2>
+  <p>The epeek plug-in relies on the <a href="http://d3js.org">d3</a> for all the visual elements created. Here we describe several utility functions defined by the epeek library to work with <a href="https://github.com/mbostock/d3/wiki/Selections">D3 selections</a></p>
+
+  <p><a name="#moveToFront" href="#moveToFront">#</a> selection.<b>moveToFront</b> ()</p>
+  <p>This method moves to the front all the nodes in the selection</p>
+
+  <p><a name="watch" href="#watch">#</a> selection.<b>watch</b> (&lt;string, callback&gt;)</p>
+  <p>This method sets a "watch" to a given style property on a selection. This means that, for a given selection, the callback given as the second argument is fired if the style property defined as the first argument changes. The callback is called on the selection passing the old and new values of the property. For example:</p>
+
+  <pre><code class="javascript">
+d3.select(div)
+  .watch("width", function(oldVal, newVal) {
+     // Here, "this" is the selected element
+  });
+  </code></pre>
+
+
+  <p><a name="selectAncestor" href="#selectAncestor">#</a> selection.<b>selectAncestor</b> (&lt;string&gt;)</p>
+  <p>Given a node retrieves its first ancestor having the type specified by the argument. For example:</p>
+
+  <pre><code class="javascript">
+var div = d3.select("#node").selectAncestor("div");
+  </code></pre>
+
+
+  <footer>
+    <aside>Released under <a href="http://www.opensource.org/licenses/apache2.0.php">Apache 2.0</a>.</aside>
+    Copyright 2014 <a href="http://www.ebi.ac.uk/~mp" rel="author">Miguel Pignatelli</a>
+  </footer>
+
+</div>
+
+<script src="../../../highlight.v0.min.js"></script>
+

@@ -1,0 +1,45 @@
+
+.tnt_tree_node {
+    $stroke-width : 1.5px;
+    $fill-color   : steelblue;
+    $empty-color  : #fff;
+    .absent {
+	fill         : none;
+	stroke       : none;
+	stroke-width : none;
+    }
+    .dubious {
+	fill         : $empty-color;
+	stroke       : $fill-color;
+	stroke-width : $stroke-width;
+    }
+    .present {
+	fill         : $fill-color;
+	stroke       : $fill-color;
+	stroke-width : $stroke-width;
+    }
+}
+
+text {
+     &.tnt_tree_label {
+     	@include small-font;
+    	fill : #000;
+     }
+}
+
+.tnt_tree_link {
+  fill: none;
+  /* stroke: #ccc; */
+  stroke-width: 1.5px;
+
+  .present {
+      stroke         : "000";
+  }
+  .dubious {
+      stroke         : "ccc";
+  }
+  .absent  {
+      stroke         : "fff";
+  }
+
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>TnT Themes</title>
+
+<div id="body">
+
+  <!-- D3 -->
+  <script src="../../../lib/d3.min.js"></script>
+
+  <!-- ePeek -->
+  <link rel="stylesheet" href="../../../lib/tnt.css" type="text/css" />
+
+  <script src="../../../lib/tnt.js"></script>
+  <script src="treefam.js"></script>
+  <link rel="stylesheet" href="treefam.css" type="text/css" />  
+
+
+<!-- <div class="container_12 grid_2" id="content">
+<div class="entry-title grid_10 mainContent"><h2 class="page-title">P51587</h2><h4>
+           - BRCA2_HUMAN
+          </h4></div>
+        <div class="entry-header entry-overview">
+            <div class="entry-overview-section">
+                <div class="entry-overview-row entry-overview-header grid_2">
+                    Protein
+                </div>
+
+                <div class="entry-overview-row grid_10">
+                    <div class="entry-overview-content content-protein">
+                        <span><strong>Breast cancer type 2 susceptibility
+                        protein</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div> -->
+
+  <div id="treefam_tree"></div>
+  <script>
+    (function() {
+        var gB = tnt.tree_annot();
+        var gBTheme = treefam_theme();
+        gBTheme (gB, document.getElementById("treefam_tree"));
+    })();
+ 
+  </script>
+
+</div>

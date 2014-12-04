@@ -1,0 +1,258 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e!Peek</title>
+
+    <!------------------->
+    <!-- ePeek sources -->
+    <!------------------->
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="../../src/ePeek.css" type="text/css" />
+
+    <!-- Local D3.js -->
+    <script src="../../lib/d3.min.js"></script>
+
+    <!-- Remove QRtag -->
+    <script type="text/javascript" src="http://api.qrtag.net/js"></script> 
+
+    <!-- Local ePeek & local themes -->
+    <script src="../../ePeek.js"></script>
+    <script src="compact.js"></script>
+    <link rel="stylesheet" href="compact.css" type="text/css" />
+
+    <!-- More? -->
+    <!----------------------------->
+    <!---- End e!Peek sources ----->
+    <!----------------------------->
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="apple-mobile-web-app-cappable" content="yes">
+    <link rel="stylesheet" media="all" href="lib/io-2012-slides/theme/css/default.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="lib/io-2012-slides/theme/css/phone.css">
+    <base target="_blank"> <!-- Open all links in a new tab -->
+    <script data-main="lib/io-2012-slides/js/slides" src="lib/io-2012-slides/js/require-1.0.8.min.js"></script>
+
+  </head>
+
+  <body style="opacity: 0">
+
+    <slides class="layout-widescreen">
+
+      <!-- Slide #1 -->
+      <slide class="title-slide segue nobackground">
+	<aside class="gdbar"><img src="ePeek_logo.png"></aside>
+	<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+	<hgroup class="auto-fadein">
+	  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+	  <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+	  <p data-config-presenter><!-- populated from slide_config.json --></p>
+	</hgroup>
+      </slide>
+
+      <!-- Slide #4.1 -->
+      <slide>
+	<hgroup>
+	  <h2>Genome Browsers the other way around...</h2>
+	</hgroup>
+	<article class="vleft">
+	  <br />
+	  <br />
+	  <ul>
+	    <li><b>e!Peek</b> allows to create genome browsers that are...
+	      <br />
+	      <br />
+	      <br />
+	      <ul>
+		<li>lightweight</li>
+		<li>re-usable</li>
+		<li>targeted at specific needs (feature-oriented)</li>
+		<li>adaptable to different javascript environment</li>
+		<li>easily embeddable in any client web page</li>
+		<li>easy to experiment with</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</article>
+      </slide>
+
+
+      <!-- Slide #2 -->
+      <slide>
+	<hgroup>
+	  <h2>Genome Browsers</h2>
+	</hgroup>
+	<article class="vleft">
+	  <ul>
+	    <br />
+	    <br />
+	    <br />
+	    <br />
+	    <li><b>Genome Browsers</b> typically are...
+	      <br />
+	      <br />
+	      <ul>
+		<li>Heavy-weighted, fully featured web applications</li>
+		<li>Try to provide the most-comprehensive data available</li>
+		<li>Very difficult to evolve and adapt to new technologies / environments</li>
+		<li>Very difficult to experiment with</li>
+		<li>Not suitable for specific needs</li>
+	      </ul>
+	    </li>
+	  </ul>
+	</article>
+      </slide>
+
+      <!-- Slide #5.1 -->
+      <slide>
+	<hgroup>
+	  <h2>e!Peek</h2>
+	</hgroup>
+	<article>
+	  <pre class="prettyprint" data-lang="javascript">
+<b>&lt;!-- Remote D3.js --&gt;
+&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek JS --&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek/minimal.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek CSS --&gt;
+&lt;link rel="stylesheet" href="http://www.ebi.ac.uk/~mp/ePeek.css" type="text/css" /&gt;</b>
+
+&lt;div id="genomeBrowser"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  (function() {
+     var gB = epeek.genome().species("human").gene("BRCA2");
+     var gBTheme = epeek_theme();
+     var gBTheme(gB, document.getElementById("genomeBrowser"));
+  })();
+&lt;/script&gt;	  </pre>
+	</article>
+      </slide>
+
+      <!-- Slide #5.3 -->
+      <slide>
+	<hgroup>
+	  <h2>e!Peek</h2>
+	</hgroup>
+	<article>
+	  <pre class="prettyprint" data-lang="javascript">
+&lt;!-- Remote D3.js --&gt;
+&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek JS --&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek/minimal.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek CSS --&gt;
+&lt;link rel="stylesheet" href="http://www.ebi.ac.uk/~mp/ePeek.css" type="text/css" /&gt;
+
+<b>&lt;div id="genomeBrowser"&gt;&lt;/div&gt;</b>
+
+&lt;script&gt;
+  (function() {
+     var gB = epeek.genome().species("human").gene("BRCA2");
+     var gBTheme = epeek_theme();
+     var gBTheme(gB, document.getElementById("genomeBrowser"));
+  })();
+&lt;/script&gt;	  </pre>
+	</article>
+      </slide>
+
+      <!-- Slide #5.4 -->
+      <slide>
+	<hgroup>
+	  <h2>e!Peek</h2>
+	</hgroup>
+	<article>
+	  <pre class="prettyprint" data-lang="javascript">
+&lt;!-- Remote D3.js --&gt;
+&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek JS --&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://www.ebi.ac.uk/~mp/ePeek/minimal.min.js"&gt;&lt;/script&gt;
+&lt;!-- Remote e!Peek CSS --&gt;
+&lt;link rel="stylesheet" href="http://www.ebi.ac.uk/~mp/ePeek.css" type="text/css" /&gt;
+
+&lt;div id="genomeBrowser"&gt;&lt;/div&gt;
+
+<b>&lt;script&gt;
+  (function() {
+     var gB = epeek.genome().species("human").gene("BRCA2");
+     var gBTheme = epeek_theme();
+     var gBTheme(gB, document.getElementById("genomeBrowser"));
+  })();</b>
+&lt;/script&gt;	  </pre>
+	</article>
+      </slide>
+
+      <!-- slide #6 -->
+      <slide>
+	<hgroup>
+	  <h2>e!Peek</h2>
+	</hgroup>
+	<article>
+	  <pre class="prettyprint" data-lang="javascript">
+  (function() {
+     var gB = epeek().species("human").gene(<input id="geneName1" type="text"></input>;
+     <b>var gBTheme = epeek_theme();</b>
+     var gBTheme(gB, document.getElementById("genomeBrowser"));
+  })();	  </pre>
+	  <div id="genomeBrowser1"></div>
+	</article>
+      </slide>
+
+      <!-- slide #7 -->
+      <slide>
+	<hgroup>
+	  <h2>TODO</h2>
+	</hgroup>
+	<article>
+	  <ul>
+	    <li>Make it practical</li>
+	    <li>Support more features</li>
+	    <li>Keep it fun</li>
+	  </ul>
+	</article>
+      </slide>
+
+    </slides>
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      // ePeeks
+
+      (function() {
+      // 1
+      d3.select("#geneName1")
+        .on("change", function(){d3.selectAll("#genomeBrowser1 div").remove();var gB=epeek.genome().species("human").gene(this.value).width(920).foreground_color("#4DA63A").background_color("#F0FFED");
+        var gBTheme = epeek_theme_compact().show_title(false);
+        gBTheme(gB, document.getElementById("genomeBrowser1"));
+        })
+})();
+    </script>
+
+    <!--[if IE]>
+	<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+	<script>CFInstall.check({mode: 'overlay'});</script>
+	<![endif]-->
+
+  </body>
+</html>
