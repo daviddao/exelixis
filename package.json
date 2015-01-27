@@ -1,0 +1,55 @@
+{
+  "name": "exelixis",
+  "description": "A quick and dirty phylogenetic library for the web",
+  "version": "0.0.1",
+  "homepage": "https://github.com/daviddao/biojs-vis-tree",
+  "author": {
+    "name": "David",
+    "url": "https://www.daviddao.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/daviddao/biojs-vis-tree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daviddao/biojs-vis-tree/issues"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2",
+      "url": "https://github.com/daviddao/biojs-vis-tree/blob/master/LICENSE"
+    }
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "mkdirp build && browserify -r ./:exelixis -o build/exelixis.js",
+    "build-browser": "npm run build",
+    "prepublish": "npm run build",
+    "watch": "watchify -r ./:exelixis -v -o build/exelixis.js",
+    "sniper": "biojs-sniper ."
+  },
+  "dependencies": {
+    "tnt.tree": "0.0.13"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.0",
+    "browserify": "6.x",
+    "biojs-sniper": "0.x",
+    "watchify": "^1.0.6",
+    "chai": "1.x",
+    "mocha": "1.x"
+  },
+  "sniper": {
+    "js": [
+      "/build/exelixis.js"
+    ],
+    "snippets": [
+      "examples"
+    ],
+    "first": "createAndUpdate"
+  },
+  "keywords": [
+    "biojs","phylogeny","tree generator"
+  ]
+}

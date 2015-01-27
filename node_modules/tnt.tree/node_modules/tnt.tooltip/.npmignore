@@ -1,0 +1,4 @@
+node_modules
+.coveralls.yml
+*~
+coverage/lcov.info
