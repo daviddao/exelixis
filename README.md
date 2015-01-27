@@ -1,6 +1,6 @@
 # Exelixis.js
 
-[![NPM version](http://img.shields.io/npm/v/exelixisjs.svg)](https://www.npmjs.org/package/exelixis)  
+[![NPM version](http://img.shields.io/npm/v/exelixis.svg)](https://www.npmjs.org/package/exelixis)  
 
 > A quick and dirty phylogeny creator for the web build on [TnT.tree](https://github.com/emepyc/tnt.tree). More coming soon!
 
