@@ -11,14 +11,14 @@ var opts = {};
 opts.width = Math.random() * 1000;
 opts.height = Math.random() * 20;
 opts.layout = "vertical";
-opts.scale = "true";
+opts.scale = true;
 
 if(Math.random() > 0.5) {
 	opts.layout = "radial";
 }
 
 if(Math.random() > 0.5) {
-	opts.scale = "false";
+	opts.scale = false;
 }
 
 opts.data = "(A:0.1,B:0.2,(C:0.3,D:0.4)E:0.5)F;"
