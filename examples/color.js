@@ -29,8 +29,8 @@ opts = {
 			toggle : true, //allows onClickEvent
 			select: true, //allows selections
 			size : 5,
-			fill : "grey",
-			stroke : "black",
+			fill : "blue",
+			stroke : "red",
 			selectedFill : "steelblue",
 			selectedSize : 4,
 		},

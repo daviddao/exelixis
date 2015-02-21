@@ -1,11 +1,12 @@
-# Exelixis.js
+# exelixis
 
 [![NPM version](http://img.shields.io/npm/v/exelixis.svg)](https://www.npmjs.org/package/exelixis)  
 
-> A quick and dirty phylogeny creator for the web build on [TnT.tree](https://github.com/emepyc/tnt.tree). More coming soon!
+> Interactive and easy-to-use phylogenetic tree viewer for the web build on [TnT.tree](https://github.com/emepyc/tnt.tree). 
 
 ## Getting Started
 Install the module with: `npm install exelixis` and build it with `npm run prepublish`
+Have a look at the examples by starting the server with `npm run sniper`
 
 ```javascript
 var exe = require('exelixis');
@@ -14,6 +15,68 @@ var updateTree = exe.updateTree;
 ```
 
 ## Documentation
+
+
+### Default opts 
+Following default settings can be customized. 
+
+```javascript
+var opts = {
+		el : document.getElementById("yourDiv"),
+		tree : {
+			data : "(homo_sapiens:12,(mus_musculus:12,(danio_rerio:13,(pan_troglodytes:9,(taeniopygia_guttata:10,callithrix_jacchus:11):12):12):10);",	
+			width : 500,
+			height : 12,
+			scale : false,
+			layoutInput : "vertical",
+		},
+		label : {
+			fontsize : 12,
+			usePics : false, 
+			pics : {
+				pictureSource : pics,
+				pictureWidth : 30,
+				pictureHeight : 40,
+			},
+		},
+		nodes : {
+			toggle : false, 
+			select: false, 
+			size : 5,
+			fill : "grey",
+			stroke : "black",
+			selectedFill : "steelblue",
+			selectedSize : 4,
+		},
+};
+```
+
+#### el 
+Change this to the div element you want to plot in your tree
+
+#### tree
+`data` (string) takes as input your newick string
+`width` (int) is the width of your tree
+`height` (int) is the height of your labels (currently under work)
+`scale` (boolean) scales the tree according to its branch lengths given in the newick string
+`layoutInput` ("vertical" or "radial") changes tree layout
+
+#### label
+`fontsize` (int) sets the fontsize
+`usePics` (boolean) use pictures in the label
+
+#### pics
+`pictureSource` (array) links to the png picture array you want to display. PicturesID has to be the same as the taxa names in the newick string.
+`pictureWidth` (int) sets the width of the picture
+`pictureHeight` (int) sets the picture height
+
+#### nodes
+`toggle` (boolean) clicking nodes will toggle its subtree
+`select` (boolean) change node to color `selectedFill` and size `selectedSize` when clicked
+`fill` (color) nodefill color
+`stroke` (color) nodestroke color
+
+
 
 #### .createTree(opts)
 
@@ -24,35 +87,22 @@ The 'createTree' method returns a phylogenetic tree.
 How to use this method
 
 ```javascript
-var tree = createTree({data: "(A,(B,(C,D)))", width: 500});
+var tree = createTree();
 ```
 
-### Default opts 
-Following default settings, which can be edited
-
-```javascript
-{
-	data : "(homo_sapiens:1,(mus_musculus:2,(danio_rerio:13,(pan_troglodytes:9,taeniopygia_guttata:10,callithrix_jacchus:1):12):4);",
-	width : 500, //width of the component
-	height : 12, //height of the labels
-	scale : false, //scaled branchlengths
-	el : document.getElementById("yourDiv"), //div the tree is put in
-	layout_input : "vertical", //vertical or radial layout
-}
-```
-
-
+not using any opts creates a tree with default opts
 
 #### .updateTree(tree,opts)
 
 **Parameter**: `tree` a tree object returned by `createTree()` , `opts` a json containing settings
 
-The 'updateTree' method updates the opts properties with animations
+The 'updateTree' method updates all opts properties which are given in `opts` with animations on runtime and saves its opts.
+All opts properties which are not mentioned stays the same as previously.
 
 How to use this method
 
 ```javascript
-updateTree(tree, {data: "(Ape,(Bear,(Clown,Dolphin)))", width: 300, heigth: 20});
+updateTree(tree, {tree:{data: "(Ape,(Bear,(Clown,Dolphin)))", width: 300, heigth: 20}});
 ```
 
 ## Contributing

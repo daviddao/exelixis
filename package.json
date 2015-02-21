@@ -1,23 +1,23 @@
 {
   "name": "exelixis",
-  "description": "A quick and dirty phylogenetic library for the web",
-  "version": "0.0.1",
-  "homepage": "https://github.com/daviddao/biojs-vis-tree",
+  "description": "Interactive phylogenetic tree viewer for the web",
+  "version": "0.0.2",
+  "homepage": "https://github.com/daviddao/exelixis",
   "author": {
     "name": "David",
     "url": "https://www.daviddao.de"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/daviddao/biojs-vis-tree.git"
+    "url": "git://github.com/daviddao/exelixis.git"
   },
   "bugs": {
-    "url": "https://github.com/daviddao/biojs-vis-tree/issues"
+    "url": "https://github.com/daviddao/exelixis/issues"
   },
   "licenses": [
     {
       "type": "Apache 2",
-      "url": "https://github.com/daviddao/biojs-vis-tree/blob/master/LICENSE"
+      "url": "https://github.com/daviddao/exelixis/blob/master/LICENSE"
     }
   ],
   "main": "lib/index.js",

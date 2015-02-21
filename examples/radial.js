@@ -15,7 +15,7 @@ opts = {
 			width : 500,
 			height : 12,
 			scale : false,
-			layoutInput : "vertical",
+			layoutInput : "radial",
 		},
 		label : {
 			fontsize : 12,
@@ -29,8 +29,8 @@ opts = {
 			toggle : true, //allows onClickEvent
 			select: true, //allows selections
 			size : 5,
-			fill : "grey",
-			stroke : "black",
+			fill : "orange",
+			stroke : "yellow",
 			selectedFill : "steelblue",
 			selectedSize : 4,
 		},
