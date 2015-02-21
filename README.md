@@ -55,26 +55,26 @@ var opts = {
 Change this to the div element you want to plot in your tree
 
 #### tree
-`data` (string) takes as input your newick string
-`width` (int) is the width of your tree
-`height` (int) is the height of your labels (currently under work)
-`scale` (boolean) scales the tree according to its branch lengths given in the newick string
-`layoutInput` ("vertical" or "radial") changes tree layout
+* `data` (string) takes as input your newick string
+* `width` (int) is the width of your tree
+* `height` (int) is the height of your labels (currently under work)
+* `scale` (boolean) scales the tree according to its branch lengths given in the newick string
+* `layoutInput` ("vertical" or "radial") changes tree layout
 
 #### label
-`fontsize` (int) sets the fontsize
-`usePics` (boolean) use pictures in the label
+* `fontsize` (int) sets the fontsize
+* `usePics` (boolean) use pictures in the label
 
 #### pics
-`pictureSource` (array) links to the png picture array you want to display. PicturesID has to be the same as the taxa names in the newick string.
-`pictureWidth` (int) sets the width of the picture
-`pictureHeight` (int) sets the picture height
+* `pictureSource` (array) links to the png picture array you want to display. PicturesID has to be the same as the taxa names in the newick string.
+* `pictureWidth` (int) sets the width of the picture
+* `pictureHeight` (int) sets the picture height
 
 #### nodes
-`toggle` (boolean) clicking nodes will toggle its subtree
-`select` (boolean) change node to color `selectedFill` and size `selectedSize` when clicked
-`fill` (color) nodefill color
-`stroke` (color) nodestroke color
+* `toggle` (boolean) clicking nodes will toggle its subtree
+* `select` (boolean) change node to color `selectedFill` and size `selectedSize` when clicked
+* `fill` (color) nodefill color
+* `stroke` (color) nodestroke color
 
 
 
