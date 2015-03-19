@@ -1,7 +1,7 @@
 {
   "name": "exelixis",
   "description": "Interactive phylogenetic tree viewer for the web",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/daviddao/exelixis",
   "author": {
     "name": "David",
@@ -30,6 +30,7 @@
     "sniper": "biojs-sniper ."
   },
   "dependencies": {
+    "biojs-io-newick": "^1.5.0",
     "tnt.tree": "0.0.13"
   },
   "devDependencies": {
@@ -47,11 +48,12 @@
     "snippets": [
       "examples"
     ],
-    "css": [
-    ],
+    "css": [],
     "first": "createAndUpdate"
   },
   "keywords": [
-    "biojs","phylogeny","tree generator"
+    "biojs",
+    "phylogeny",
+    "tree generator"
   ]
 }

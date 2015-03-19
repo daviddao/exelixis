@@ -147,6 +147,265 @@ module.exports = {
 	ensembl_pics: pics,
 };
 },{}],3:[function(require,module,exports){
+/**
+ * Extended Newick format parser in JavaScript.
+ *
+ * Copyright (c) Miguel Pignatelli 2014 based on Jason Davies  
+ *  
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *  
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *  
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Example tree (from http://en.wikipedia.org/wiki/Newick_format):
+ *
+ * +--0.1--A
+ * F-----0.2-----B            +-------0.3----C
+ * +------------------0.5-----E
+ *                            +---------0.4------D
+ *
+ * Newick format:
+ * (A:0.1,B:0.2,(C:0.3,D:0.4)E:0.5)F;
+ *
+ * Converted to JSON:
+ * {
+ *   name: "F",
+ *   children: [
+ *     {name: "A", branch_length: 0.1},
+ *     {name: "B", branch_length: 0.2},
+ *     {
+ *       name: "E",
+ *       length: 0.5,
+ *       children: [
+ *         {name: "C", branch_length: 0.3},
+ *         {name: "D", branch_length: 0.4}
+ *       ]
+ *     }
+ *   ]
+ * }
+ *
+ * Converted to JSON, but with no names or lengths:
+ * {
+ *   children: [
+ *     {}, {}, {
+ *       children: [{}, {}]
+ *     }
+ *   ]
+ * }
+ */
+
+module.exports = parse_nhx = function(s) {
+	var ancestors = [];
+	var tree = {};
+	// var tokens = s.split(/\s*(;|\(|\)|,|:)\s*/);
+	//[&&NHX:D=N:G=ENSG00000139618:T=9606]
+	var tokens = s.split( /\s*(;|\(|\)|\[|\]|,|:|=)\s*/ );
+	for (var i=0; i<tokens.length; i++) {
+		var token = tokens[i];
+		switch (token) {
+			case '(': // new children
+				var subtree = {};
+				tree.children = [subtree];
+				ancestors.push(tree);
+				tree = subtree;
+				break;
+			case ',': // another branch
+				var subtree = {};
+				ancestors[ancestors.length-1].children.push(subtree);
+				tree = subtree;
+				break;
+			case ')': // optional name next
+				tree = ancestors.pop();
+				break;
+			case ':': // optional length next
+				break;
+			default:
+				var x = tokens[i-1];
+				// var x2 = tokens[i-2];
+				if (x == ')' || x == '(' || x == ',') {
+					tree.name = token;
+				} 
+				else if (x == ':') {
+					var test_type = typeof token;
+					if(!isNaN(token)){
+						tree.branch_length = parseFloat(token);
+					}
+					// tree.length = parseFloat(token);
+				}
+				else if (x == '='){
+					var x2 = tokens[i-2];
+					switch(x2){
+						case 'D':
+							tree.duplication = token; 
+							break; 
+						case 'G':
+							tree.gene_id = token;
+							break;
+						case 'T':
+							tree.taxon_id = token;
+							break;
+
+					}
+				}
+				else {
+					var test;
+
+				}
+		}
+	}
+	return tree;
+};
+
+
+},{}],4:[function(require,module,exports){
+module.exports = require('./newick');
+module.exports.parse_nhx = require('./extended_newick');
+
+},{"./extended_newick":3,"./newick":5}],5:[function(require,module,exports){
+/**
+ * Newick format parser in JavaScript.
+ *
+ * Copyright (c) edited by Miguel Pignatelli 2014, based on Jason Davies 2010.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Example tree (from http://en.wikipedia.org/wiki/Newick_format):
+ *
+ * +--0.1--A
+ * F-----0.2-----B            +-------0.3----C
+ * +------------------0.5-----E
+ *                            +---------0.4------D
+ *
+ * Newick format:
+ * (A:0.1,B:0.2,(C:0.3,D:0.4)E:0.5)F;
+ *
+ * Converted to JSON:
+ * {
+ *   name: "F",
+ *   children: [
+ *     {name: "A", branch_length: 0.1},
+ *     {name: "B", branch_length: 0.2},
+ *     {
+ *       name: "E",
+ *       length: 0.5,
+ *       children: [
+ *         {name: "C", branch_length: 0.3},
+ *         {name: "D", branch_length: 0.4}
+ *       ]
+ *     }
+ *   ]
+ * }
+ *
+ * Converted to JSON, but with no names or lengths:
+ * {
+ *   children: [
+ *     {}, {}, {
+ *       children: [{}, {}]
+ *     }
+ *   ]
+ * }
+ */
+
+
+
+module.exports.parse_newick = function (s) {
+	var ancestors = [];
+	var tree = {};
+	var tokens = s.split(/\s*(;|\(|\)|,|:)\s*/);
+	for (var i=0; i<tokens.length; i++) {
+		var token = tokens[i];
+		switch (token) {
+			case '(': // new children
+				var subtree = {};
+				tree.children = [subtree];
+				ancestors.push(tree);
+				tree = subtree;
+				break;
+			case ',': // another branch
+				var subtree = {};
+				ancestors[ancestors.length-1].children.push(subtree);
+				tree = subtree;
+				break;
+			case ')': // optional name next
+				tree = ancestors.pop();
+				break;
+			case ':': // optional length next
+				break;
+			default:
+				var x = tokens[i-1];
+				if (x == ')' || x == '(' || x == ',') {
+					tree.name = token;
+				} else if (x == ':') {
+					tree.branch_length = parseFloat(token);
+				}
+		}
+	}
+	return tree;
+};
+
+module.exports.parse_json = function (json) {
+	function nested(nest){
+		var subtree = "";
+
+		if(nest.hasOwnProperty('children')){
+			var children = [];
+			nest.children.forEach(function(child){
+				var subsubtree = nested(child);
+				children.push(subsubtree);
+			});
+      var substring = children.join();
+      if(nest.hasOwnProperty('name')){
+        subtree = "("+substring+")" + nest.name;
+      }
+      if(nest.hasOwnProperty('branch_length')){
+        subtree = subtree + ":"+nest.branch_length;
+      }
+		}
+		else{
+      var leaf = "";
+      if(nest.hasOwnProperty('name')){
+        leaf = nest.name;
+      }
+      if(nest.hasOwnProperty('branch_length')){
+        leaf = leaf + ":"+nest.branch_length;
+      }
+      subtree = subtree + leaf;
+		}
+		return subtree;
+	}
+	return nested(json) +";";
+};
+
+},{}],6:[function(require,module,exports){
 var apijs = require('tnt.api');
 var tree = {};
 
@@ -258,7 +517,7 @@ tree.diagonal.radial = function () {
 
 module.exports = exports = tree.diagonal;
 
-},{"tnt.api":14}],4:[function(require,module,exports){
+},{"tnt.api":17}],7:[function(require,module,exports){
 if (typeof tnt === "undefined") {
     module.exports = tnt = {}
 }
@@ -288,7 +547,7 @@ d3.selection.prototype.selectAncestor = function(type) {
     }
 };
 
-},{"./treeWrapper.js":9,"biojs-events":10,"d3":13,"tnt.tooltip":18,"tnt.utils":22}],5:[function(require,module,exports){
+},{"./treeWrapper.js":12,"biojs-events":13,"d3":16,"tnt.tooltip":21,"tnt.utils":25}],8:[function(require,module,exports){
 var apijs = require("tnt.api");
 var tree = {};
 
@@ -514,7 +773,7 @@ module.exports = exports = tree.label;
 
 
 
-},{"tnt.api":14}],6:[function(require,module,exports){
+},{"tnt.api":17}],9:[function(require,module,exports){
 // Based on the code by Ken-ichi Ueda in http://bl.ocks.org/kueda/1036776#d3.phylogram.js
 
 var apijs = require("tnt.api");
@@ -641,7 +900,7 @@ tree.layout.radial = function () {
 
 module.exports = exports = tree.layout;
 
-},{"./diagonal.js":3,"tnt.api":14}],7:[function(require,module,exports){
+},{"./diagonal.js":6,"tnt.api":17}],10:[function(require,module,exports){
 var apijs = require("tnt.api");
 var tree = {};
 
@@ -792,7 +1051,7 @@ tree.node_display.cond = function () {
 
 module.exports = exports = tree.node_display;
 
-},{"tnt.api":14}],8:[function(require,module,exports){
+},{"tnt.api":17}],11:[function(require,module,exports){
 var apijs = require("tnt.api");
 
 tnt.tree = function () {
@@ -1226,7 +1485,7 @@ tnt.tree = function () {
 
 module.exports = exports = tnt.tree;
 
-},{"tnt.api":14}],9:[function(require,module,exports){
+},{"tnt.api":17}],12:[function(require,module,exports){
 var tree = require ("./tree.js");
 tree.label = require("./label.js");
 tree.diagonal = require("./diagonal.js");
@@ -1239,7 +1498,7 @@ tree.parse_nhx = require("tnt.newick").parse_nhx;
 module.exports = exports = tree;
 
 
-},{"./diagonal.js":3,"./label.js":5,"./layout.js":6,"./node_display.js":7,"./tree.js":8,"tnt.newick":16,"tnt.tree.node":20}],10:[function(require,module,exports){
+},{"./diagonal.js":6,"./label.js":8,"./layout.js":9,"./node_display.js":10,"./tree.js":11,"tnt.newick":19,"tnt.tree.node":23}],13:[function(require,module,exports){
 var events = require("backbone-events-standalone");
 
 events.onAll = function(callback,context){
@@ -1262,7 +1521,7 @@ events.mixin = function(proto) {
 
 module.exports = events;
 
-},{"backbone-events-standalone":12}],11:[function(require,module,exports){
+},{"backbone-events-standalone":15}],14:[function(require,module,exports){
 /**
  * Standalone extraction of Backbone.Events, no external dependency required.
  * Degrades nicely when Backone/underscore are already available in the current
@@ -1541,10 +1800,10 @@ module.exports = events;
   }
 })(this);
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = require('./backbone-events-standalone');
 
-},{"./backbone-events-standalone":11}],13:[function(require,module,exports){
+},{"./backbone-events-standalone":14}],16:[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.5.5"
@@ -11049,10 +11308,10 @@ module.exports = require('./backbone-events-standalone');
   if (typeof define === "function" && define.amd) define(d3); else if (typeof module === "object" && module.exports) module.exports = d3;
   this.d3 = d3;
 }();
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = require("./src/api.js");
 
-},{"./src/api.js":15}],15:[function(require,module,exports){
+},{"./src/api.js":18}],18:[function(require,module,exports){
 var api = function (who) {
 
     var _methods = function () {
@@ -11238,10 +11497,10 @@ var api = function (who) {
 };
 
 module.exports = exports = api;
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = require("./src/newick.js");
 
-},{"./src/newick.js":17}],17:[function(require,module,exports){
+},{"./src/newick.js":20}],20:[function(require,module,exports){
 /**
  * Newick and nhx formats parser in JavaScript.
  *
@@ -11401,10 +11660,10 @@ module.exports = {
     }
 };
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = require("./src/tooltip.js");
 
-},{"./src/tooltip.js":19}],19:[function(require,module,exports){
+},{"./src/tooltip.js":22}],22:[function(require,module,exports){
 var apijs = require("tnt.api");
 
 var tooltip = function () {
@@ -11600,10 +11859,10 @@ tooltip.images.close = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACA
 
 module.exports = tooltip;
 
-},{"tnt.api":14}],20:[function(require,module,exports){
+},{"tnt.api":17}],23:[function(require,module,exports){
 module.exports = require("./src/node.js");
 
-},{"./src/node.js":21}],21:[function(require,module,exports){
+},{"./src/node.js":24}],24:[function(require,module,exports){
 var apijs = require("tnt.api");
 var iterator = require("tnt.utils").iterator;
 
@@ -12057,10 +12316,10 @@ var tnt_node = function (data) {
 module.exports = exports = tnt_node;
 
 
-},{"tnt.api":14,"tnt.utils":22}],22:[function(require,module,exports){
+},{"tnt.api":17,"tnt.utils":25}],25:[function(require,module,exports){
 module.exports = require("./src/index.js");
 
-},{"./src/index.js":23}],23:[function(require,module,exports){
+},{"./src/index.js":26}],26:[function(require,module,exports){
 // require('fs').readdirSync(__dirname + '/').forEach(function(file) {
 //     if (file.match(/.+\.js/g) !== null && file !== __filename) {
 // 	var name = file.replace('.js', '');
@@ -12073,7 +12332,7 @@ var utils = require("./utils.js");
 utils.reduce = require("./reduce.js");
 module.exports = exports = utils;
 
-},{"./reduce.js":24,"./utils.js":25}],24:[function(require,module,exports){
+},{"./reduce.js":27,"./utils.js":28}],27:[function(require,module,exports){
 var reduce = function () {
     var smooth = 5;
     var value = 'val';
@@ -12255,7 +12514,7 @@ module.exports.line = line;
 module.exports.block = block;
 
 
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 
 module.exports = {
     iterator : function(init_val) {
@@ -12309,6 +12568,10 @@ module.exports = {
 @class exelixis
  */
 
+/**
+* Get biojs-io-newick parser
+*/
+var parser = require("biojs-io-newick");
 
 exe = {};
 
@@ -12532,7 +12795,7 @@ exe.createTree = function (opts) {
 	//Create a tree
 	var tree = tnt.tree();
 
-	tree.data(tnt.tree.parse_newick(data))
+	tree.data(parser.parse_newick(data))
 		.layout(layout)
 		.node_display(nodeDisplay);
 
@@ -12577,7 +12840,7 @@ exe.updateTree = function(tree, opts) {
 	var nodeDisplay;
 	nodeDisplay = createNodeDisplay(parsedOpts);
 
-	tree.data(tnt.tree.parse_newick(data))
+	tree.data(parser.parse_newick(data))
 		.layout(layout)
 		.node_display(nodeDisplay);
 		
@@ -12600,4 +12863,4 @@ module.exports = {
 
 
 
-},{"./opts":1,"./pics":2,"tnt.tree":4}]},{},[]);
+},{"./opts":1,"./pics":2,"biojs-io-newick":4,"tnt.tree":7}]},{},[]);
