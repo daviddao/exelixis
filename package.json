@@ -52,6 +52,11 @@
     "first": "createAndUpdate"
   },
   "keywords": [
-    "biojs","phylogeny","tree generator"
-  ]
+    "biojs","phylogeny","tree generator", "galaxy-vis"
+  ],
+  "galaxy": {
+    "datatypes": [
+      "Newick"
+    ]
+  }
 }
