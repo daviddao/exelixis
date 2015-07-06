@@ -1,12 +1,9 @@
-var xhr = require("xhr");
-xhr(jsonURL, function(err, response,text){
-	var data = JSON.parse(text).data;
-	
-	var exe = require("exelixis");
+var exe = require("exelixis");
+galaxy.getData(function(data){
 	var createTree = exe.createTree;
 	
 	var opts = {
-		el : galaxyDiv,
+		el : galaxy.el,
 		tree : {
 			data : data,	
 			width : 500,
@@ -34,5 +31,4 @@ xhr(jsonURL, function(err, response,text){
 	};
 
 	tree = createTree(opts);
-
 });

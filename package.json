@@ -56,7 +56,7 @@
   ],
   "galaxy": {
     "datatypes": [
-      "Newick"
+      "Newick", "data.Text"
     ]
   }
 }
