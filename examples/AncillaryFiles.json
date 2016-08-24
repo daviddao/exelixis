@@ -1,0 +1,12 @@
+{
+	"js": [
+		"https://cdn.rawgit.com/kmahelona/ipython_notebook_goodies/master/ipython_notebook_toc.js",
+		"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js",
+		"external/d3-context-menu/js/d3-context-menu.js",
+		"external/parsers.js",
+		"external/callbacks.js",
+		"external/rootchain.js"],
+	"css": [
+		"external/d3-context-menu/css/d3-context-menu.css"
+	]
+}
