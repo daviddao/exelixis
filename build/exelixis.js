@@ -3025,7 +3025,7 @@ tnt_tree.label.histogram = function() {
             rotate : 0
         };
 
-        if (layout_type === "phylo") {
+        if (layout_type === "phylocommunity") {
             var nRadius = parseFloat(document.getElementById("nRadius").value);
             var max_tree_radius = (opts.tree.width/2) * nRadius;
             t.translate[0] = max_tree_radius - d.y;
@@ -3092,10 +3092,10 @@ tnt_tree.label.histogram = function() {
     return label;
 }
 
-tnt_tree.layout.phylo = function () {
+tnt_tree.layout.phylocommunity = function () {
     var layout = tree.layout();
     // Elements like 'labels' depend on the layout type. This exposes a way of identifying the layout type
-    layout.type = 'phylo';
+    layout.type = 'phylocommunity';
 
     var default_width = 360;
     var r = default_width / 2;
@@ -3282,8 +3282,8 @@ function createLayout(opts) {
     else if(string === "radial") {
         layout = tnt_tree.layout.radial().width(width).scale(scale);
     }
-    else if(string === "phylo") {
-        layout = tnt_tree.layout.phylo().width(width).scale(scale);
+    else if(string === "phylocommunity") {
+        layout = tnt_tree.layout.phylocommunity().width(width).scale(scale);
     }
     else {
         console.log("Unknown Layout Parameter: Please choose between 'vertical' and 'radial' layout");
@@ -3305,7 +3305,7 @@ function createNodeDisplay(opts) {
     var selected_node_fill = opts.nodes.selectedFill;
 
     
-    tnt_tree.node_display.phylo_circle = function () {
+    tnt_tree.node_display.phylocommunity_circle = function () {
         var n = tree.node_display();
 
         n.display (function (node) {
@@ -3346,8 +3346,8 @@ function createNodeDisplay(opts) {
     
     
     var expanded_node = {};
-    if(opts.tree.layoutInput === "phylo") {
-        expanded_node = tnt_tree.node_display.phylo_circle();
+    if(opts.tree.layoutInput === "phylocommunity") {
+        expanded_node = tnt_tree.node_display.phylocommunity_circle();
     } else {
         expanded_node = tnt_tree.node_display.circle()
             .size(node_size)
@@ -3412,7 +3412,7 @@ function createNodeEvent(opts) {
                 tree.update();
             }
             
-            if(opts.tree.layoutInput === "phylo") {
+            if(opts.tree.layoutInput === "phylocommunity") {
                 createContextMenu();
                 draw_enclosing_circle();
             }
@@ -3422,7 +3422,7 @@ function createNodeEvent(opts) {
             eventFunction = function(node) {
                 toggleClick(node);
                 tree.update();
-                if(opts.tree.layoutInput === "phylo") {
+                if(opts.tree.layoutInput === "phylocommunity") {
                     createContextMenu();
                     draw_enclosing_circle();
                 }
@@ -3605,7 +3605,7 @@ exe.createTree = function (opts) {
 
     // VR 20160621
     // Create ContextMenu only with proper layout
-    if(parsedOpts.tree.layoutInput === "phylo")
+    if(parsedOpts.tree.layoutInput === "phylocommunity")
         createContextMenu();
 
     return tree;
@@ -3657,9 +3657,10 @@ exe.updateTree = function(tree, opts) {
     tree.update();
 
     // VR 20160623
-    // Create ContextMenu and enclosing circle only with proper layout
-    if(parsedOpts.tree.layoutInput === "phylo") {
-
+    // Create ContextMenu, enclosing circle,
+    // branch color and tooltips 
+    // only with proper layout
+    if(parsedOpts.tree.layoutInput === "phylocommunity") {
         tree.branch_color(function(source, target) {
             var data = target.data();
             var color = "black";
@@ -3675,17 +3676,6 @@ exe.updateTree = function(tree, opts) {
         createContextMenu();
         draw_enclosing_circle();
         display_tooltip();
-        /*
-        var nRadius = parseFloat(document.getElementById("nRadius").value);
-        var root_node = d3.select(".root");
-        root_node.append("circle")
-                .attr("x",opts.tree.width/2)
-                .attr("y",opts.tree.width/2)
-                .attr("r",((opts.tree.width/2)*nRadius)) 
-                .attr("stroke", "black")
-                .attr("stroke-width",0.5)
-                .attr('fill', 'none');
-        */
     }
 }
 

@@ -24,7 +24,7 @@ opts = {
 			data : "();",	
 			width : 2000,
 			scale : true,
-			layoutInput : "phylo",
+			layoutInput : "phylocommunity",
 		},
 		label : {
 			fontsize : 12,
