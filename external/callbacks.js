@@ -9,9 +9,8 @@ function onload_cbak() {
             var reader = new FileReader();
             reader.onload = function (e)
             {
-                console.log(reader.result);
+                //console.log(reader.result);
                 var lines = reader.result.split('\n');
-                //debugger;
                 parseCSVLines(lines);
                 fileInputTree.disabled = false;
             }
@@ -31,19 +30,10 @@ function onload_cbak() {
                 opts.tree.data = lines[0];
                 var start = new Date().getTime();
                 updateTree(tree,opts);
-                /*var mynode = d3.select(".root");
-                mynode.append("circle")
-                        .attr("x",1000)
-                        .attr("y",1000)
-                        .attr("r",800+30)
-                        .attr("stroke", "black")
-                        .attr("stroke-width",0.5)
-                        .attr('fill', 'none');
-                */
+
                 var end = new Date().getTime();
                 var time = end - start;
-                console.log('Execution time load new tree: ' + time);
-                //debugger;
+                //console.log('Execution time load new tree: ' + time);
                 computeInnerLeavesHistograms(tree.data());
 
                 var inputTreeNameToSaveAs = document.getElementById("inputTreeNameToSaveAs");
@@ -73,7 +63,6 @@ computeInnerLeavesHistograms = function (tree) {
             var count = nest.children.length;
             if (count>0)
             {
-                //debugger;
                 opts.table_hist.histograms[nest.name] = [];
                 for (var l in opts.table_hist.labels)
                     opts.table_hist.histograms[nest.name].push(0);
@@ -90,8 +79,7 @@ computeInnerLeavesHistograms = function (tree) {
         }
     }
     nested(tree);
-    //debugger;
-    console.log(tree);
+    //console.log(tree);
 };
 
 function updateLegend(th)
@@ -159,7 +147,7 @@ function destroyClickedElement(event)
 
 function saveTreeAsFile()
 {
-    var treedata = opts.tree.data; //document.getElementById("inputTextToSave").value;
+    var treedata = opts.tree.data;
     var treedataAsBlob = new Blob([treedata], {type:'text/plain'});
     var treeNameToSaveAs = document.getElementById("inputTreeNameToSaveAs").value;
 

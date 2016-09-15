@@ -66,7 +66,6 @@ parseTableHist = function (lines) {
     var table_hist = {"histograms":{}};
     for(var line = 0; line < lines.length; line++)
     {
-        //console.log(lines[line]);
         var l = lines[line];
         var parts = l.split(",");
         var label = parts[0];
@@ -83,18 +82,15 @@ parseTableHist = function (lines) {
             default:
                 if (label.length>0)
                 {
-                    // console.log(l);
-                    // console.log(parts);
                     table_hist.histograms[label] = [];
                     for (idx=1;idx<parts.length;idx++)
                         table_hist.histograms[label].push(parseFloat(parts[idx]));
                 }
         }
     }
-    // console.log(table_hist);
+
     table_hist = normalize_hist(table_hist);
-    // console.log('normalized');
-    // console.log(table_hist);
+
     return table_hist;
 };
 
@@ -102,18 +98,16 @@ parseXItol = function (lines) {
     var xitol = {};
     for(var line = 0; line < lines.length; line++)
     {
-        // console.log(lines[line]);
         var l = lines[line];
         var parts = l.split("\t");
         var node_name = parts[0];
         var var_type = parts[1];
         if (!xitol.hasOwnProperty(node_name))
             xitol[node_name] = {};
-        xitol[node_name][var_type] = {}; //range/significant
+        xitol[node_name][var_type] = {};
         xitol[node_name][var_type].hex_color = parts[2];
         xitol[node_name][var_type].notes = parts[3];
     }
-    // console.log(xitol);
     return xitol;
 };
 
@@ -133,8 +127,6 @@ parseCSV = function (lines) {
     var line_l = lines[1];
     var parts_l = line_l.split("\t");
     var color_values = new Set();
-    //var line_c = lines[2];
-    //var parts_c = line_c.split("\t");
     
     for (var idx = 0; idx < rel_freqs_indices.length; idx++)
     {
@@ -222,7 +214,6 @@ parseCSV = function (lines) {
             table_hist.color_map[items[idx][0]] = {"radius": cnt*3};
             cnt++;
         }
-    //table_hist = normalize_hist(table_hist);
     return {'table_hist': table_hist, 'xitol': xitol};
 }
 
@@ -232,6 +223,5 @@ function parseCSVLines(lines)
     opts.table_hist = dd.table_hist;
     opts.xitol = dd.xitol;
     document.getElementById("csv-area").value = dd.table_hist.csv_header + "\n"; 
-    //updateTree(tree,opts);
     updateLegend(opts.table_hist);
 }
