@@ -1,0 +1,24 @@
+<h1>PhyloCommunity example</h1>
+
+<div id="context-menu"></div>
+<div id="legend" style="width:100px;">Legend:<br> </div>
+<div id="root_chain"></div>
+<p>
+   Sliders changes radius size within which tree is drawn and zooming of histogram<br>
+   <input type="range" min="0" max="1" value="0.8" step="0.1" id="nRadius">
+   <input type="range" min="0" max="5" value="5" step="0.5" id="labelHistogramK">
+</p>
+<div id="uploadSectionDiv">
+   <input type="file" id="fileInputCSV" accept=".mibybranch"/>		
+   <input type="file" id="fileInputTree" disabled="disabled" accept=".TreeLabeled"/>
+</div>
+<div id="exportNewickDiv">
+   <br> Export tree "as-seen" (newick): <br>
+   <input id="inputTreeNameToSaveAs" value="savedTree.tree" disabled="true"></input>
+   <button id="saveTreeAsFileButton" onclick="saveTreeAsFile()" disabled="true">Save</button>
+</div>
+<div id="yourDiv"></div>
+<div>
+   <textarea rows="10" cols="80" id="csv-area" style="width:100%;">
+   </textarea>
+</div>
